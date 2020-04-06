@@ -1,6 +1,8 @@
-import { Controller, Get, Req, Post, Param, Body, Query, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Req, Post, Param, Body, Query, Put, Delete, HttpException, HttpStatus, UseFilters } from '@nestjs/common';
 import { CreateCatDto, ListAllEntities, UpdateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
+import { ForbiddenException } from 'src/exception/forbidden.exception';
+import { HttpExceptionFilter } from 'src/exception/filter.exception';
 
 @Controller('cats')
 export class CatsController {
@@ -23,6 +25,13 @@ export class CatsController {
     // }
     findOne(@Param('id') id): string {
         console.log('param ID -> ', id);
+
+        // e.g
+        if (id == 0) {
+            // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+            throw new ForbiddenException();
+        }
+
         return `this action return a #${id} cat`;
     }
 
@@ -32,11 +41,15 @@ export class CatsController {
     }
 
     @Post()
+    @UseFilters(new HttpExceptionFilter)
     // create(): string {
     //     return 'This action adds a new cat';
     // }
     async create(@Body() createCatDto: CreateCatDto) {
         // return 'This action adds new cat';
+
+        if (createCatDto.name == "fvsaddam") throw new ForbiddenException();
+
         this.catsService.create(createCatDto);
     }
 
