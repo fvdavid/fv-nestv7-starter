@@ -1,8 +1,10 @@
-import { Controller, Get, Req, Post, Param, Body, Query, Put, Delete, HttpException, HttpStatus, UseFilters } from '@nestjs/common';
+import { Controller, Get, Req, Post, Param, Body, Query, Put, Delete, UsePipes, ParseUUIDPipe } from '@nestjs/common';
 import { CreateCatDto, ListAllEntities, UpdateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { ForbiddenException } from 'src/exception/forbidden.exception';
 import { HttpExceptionFilter } from 'src/exception/filter.exception';
+import { ValidationPipe } from 'src/pipe/validation.pipe';
+import { ParseIntPipe } from 'src/pipe/parse-int.pipe';
 
 @Controller('cats')
 export class CatsController {
@@ -25,14 +27,21 @@ export class CatsController {
     // }
     findOne(@Param('id') id): string {
         console.log('param ID -> ', id);
-
-        // e.g
         if (id == 0) {
-            // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
             throw new ForbiddenException();
         }
-
         return `this action return a #${id} cat`;
+    }
+
+    @Get('id')
+    async findOneWithPipe(@Param('id', new ParseIntPipe()) id) {
+        return this.catsService.findOne(id);
+    }
+
+    // with pipe parseUUID
+    @Get('id')
+    async findOneWithPipeUUID(@Param('id', new ParseUUIDPipe()) id) {
+        return this.catsService.findOne(id);
     }
 
     @Put(':id')
@@ -40,16 +49,16 @@ export class CatsController {
         return `This action updates a #${id} cat`;
     }
 
+    // Param-scoped pipes are useful when the validation logic concerns only one specified parameter.
     @Post()
-    @UseFilters(new HttpExceptionFilter)
-    // create(): string {
-    //     return 'This action adds a new cat';
-    // }
-    async create(@Body() createCatDto: CreateCatDto) {
-        // return 'This action adds new cat';
+    async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
+        this.catsService.create(createCatDto);
+    }
 
-        if (createCatDto.name == "fvsaddam") throw new ForbiddenException();
-
+    // Alternatively, to set up a pipe at a method level, use the @UsePipes() decorator.
+    @Post()
+    @UsePipes(new ValidationPipe)
+    async createSecond(@Body() createCatDto: CreateCatDto) {
         this.catsService.create(createCatDto);
     }
 
