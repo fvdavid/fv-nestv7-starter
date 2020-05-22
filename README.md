@@ -2,7 +2,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Database Mysql](https://github.com/fvdavid/fv-nestv7-starter/tree/databaseMysql)
+- [Export To Excel](https://github.com/fvdavid/fv-nestv7-starter/tree/exportToExcel)
 
 ## Installation
 
@@ -35,11 +37,6 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-- [Database Mysql](https://github.com/fvdavid/fv-nestv7-starter/tree/databaseMysql)
-- [Export To Excel](https://github.com/fvdavid/fv-nestv7-starter/tree/exportToExcel)
 
 ## Stay in touch
 
