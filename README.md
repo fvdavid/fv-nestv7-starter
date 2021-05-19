@@ -2,7 +2,6 @@
 
 ## Description
 
-- [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 - [Database Mysql](https://github.com/fvdavid/fv-nestv7-starter/tree/databaseMysql)
 - [Export To Excel](https://github.com/fvdavid/fv-nestv7-starter/tree/exportToExcel)
 - [CRUD with GraphQL](https://github.com/fvdavid/fv-nestv7-starter/tree/graphql-code)
