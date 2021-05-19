@@ -1,18 +1,18 @@
-### Fv-Nest-v7-starter
+## Fv-Nest-v7-starter
 
-## Description
+### Description
 
 - [Database Mysql](https://github.com/fvdavid/fv-nestv7-starter/tree/databaseMysql)
 - [Export To Excel](https://github.com/fvdavid/fv-nestv7-starter/tree/exportToExcel)
 - [CRUD with GraphQL](https://github.com/fvdavid/fv-nestv7-starter/tree/graphql-code)
 
-## Installation
+### Installation
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+### Running the app
 
 ```bash
 # development
@@ -25,7 +25,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+### Test
 
 ```bash
 # unit tests
@@ -38,9 +38,9 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Stay in touch
+### Stay in touch
 
 - Gitlab - [David Tobing](https://gitlab.com/fv.david)
 
-## License
+### License
   Nest is [MIT licensed](LICENSE).
