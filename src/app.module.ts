@@ -1,34 +1,13 @@
-import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
-import { CatsModule } from './cats/cats.module';
-// import { LoggerMiddleware } from './middleware/logger-middleware';
-import { logger } from './middleware/logger-middleware';
-import { APP_PIPE } from '@nestjs/core';
-import { ValidationPipe } from './pipe/validation.pipe';
+import { Module } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { EmployeesModule } from './employees/employees.module';
 
 @Module({
   imports: [
-    CatsModule,
+    GraphQLModule.forRoot({autoSchemaFile: true}),
+    EmployeesModule
   ],
-  providers: [
-    {
-      provide: APP_PIPE,
-      useClass: ValidationPipe,
-    }
-  ]
+  controllers: [],
+  providers: [],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      // .apply(LoggerMiddleware)
-      .apply(logger)
-      .exclude(
-        { path: 'dogs', method: RequestMethod.GET },
-        { path: 'dogs', method: RequestMethod.POST },
-      )
-      .forRoutes(
-        {
-          path: 'cats', method: RequestMethod.GET,
-        }
-      );
-  }
-}
+export class AppModule {}
