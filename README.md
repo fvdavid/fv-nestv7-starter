@@ -6,6 +6,9 @@
 - [Export To Excel](https://github.com/fvdavid/fv-nestv7-starter/tree/exportToExcel)
 - [CRUD with GraphQL](https://github.com/fvdavid/fv-nestv7-starter/tree/graphql-code)
 
+coming soon
+  * CRUD with Mongodb GraphQl 
+
 ### Installation
 
 ```bash
